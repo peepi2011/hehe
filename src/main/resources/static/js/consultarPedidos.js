@@ -46,7 +46,7 @@ function mostrarPedidoApolice(pedidoApolice) {
             })
             .then(function (data) {
                 $("#nif").val(data.nif);
-                $("#nif").prop("readOnly", true);
+                $("#nif").prop("disabled", true);
                 $("#matricula").val(data.matricula);
                 $("#matricula").prop("readOnly", true);
                 $("#tipo_seguro").val(data.tipo_seguro);
@@ -133,6 +133,7 @@ function enviarPropostaApolice() {
                 }
             })
 }
+
 
 function uploadSingleFile(file) {
     var formData = new FormData();
@@ -243,18 +244,18 @@ $(document).ready(function () {
 
     listarPedidoApolices();
     
-    $('#singleFileUploadButton').click(function() {
+    $("#singleFileUploadButton").click(function() {
         var files = singleFileUploadInput.files;
-        
-        /*if(files.length === 0) {
+        /*
+        if(files.length === 0) {
         singleFileUploadError.innerHTML = "Please select a file";
         singleFileUploadError.style.display = "block";
     }
     */
     uploadSingleFile(files[0]);
-    //event.preventDefault();
+    event.preventDefault();
+    }); 
     
-    });
     
     $('#pedir-botao').click(function () {
         novoPedidoApolice();
@@ -266,9 +267,17 @@ $(document).ready(function () {
     $('#pedido-guardar-botao').click(function () {
         criarPedidoApolice();
     });
+    /*
     $('#proposta-guardar-botao').click(function () {
-        enviarPropostaApolice();
+        var files = singleFileUploadInput.files;
+        if(files.length === 0) {
+        singleFileUploadError.innerHTML = "Please select a file";
+        singleFileUploadError.style.display = "block";
+    }
+    uploadSingleFile(files[0]);
+    event.preventDefault();
     });
+    */
 
     $('#pedido-apolices-table').delegate('tr td:first-child', 'click', function () {
         var numero_pedido = $(this).text();
