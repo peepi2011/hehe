@@ -45,6 +45,7 @@ function mostrarPedidoApolice(pedidoApolice) {
                 return resp.json();
             })
             .then(function (data) {
+                $('#numero_pedido').val(data.numero_pedido);
                 $("#nif").val(data.nif);
                 $("#nif").prop("disabled", true);
                 $("#matricula").val(data.matricula);
@@ -87,20 +88,8 @@ function enviarPropostaApolice() {
     let url = '/api/propostaapolices/';
     let method = 'post';
     let propostaData = {
-        nif: $("#nif").val(),
-        seguradora: $("#seguradora").val(),
-        matricula: $("#matricula").val(),
-        dataSubscricao: $("#data_subscricao").val(),
-        dataTermino: $("#data_termino").val(),
-        premio: $("#premio").val(),
-        estado:  $("input[name='estado']:checked").val()
-    }
-
-    if (selectApolice) {
-        url = url + selectApolice;
-        method = 'put';
-    } else {
-        propostaData['numero_apolice'] = $("#numero_apolice").val();
+        descricao: $("#detalhes").val(),
+        numero_pedido: $("#numero_pedido").val()
     }
 
     fetch(url, {
@@ -119,6 +108,7 @@ function enviarPropostaApolice() {
                     return resp.json();
                 }
             })
+            /*
             .then(function (data) {
                 if (typeof data.error !== "undefined") {
                     $.alert({
@@ -132,8 +122,8 @@ function enviarPropostaApolice() {
                     });
                 }
             })
+    */
 }
-
 
 function uploadSingleFile(file) {
     var formData = new FormData();
@@ -143,6 +133,9 @@ function uploadSingleFile(file) {
     fetch(url, {
         method: method,
         body: formData, 
+    })
+            .then(function (resp) {
+                console.log(formData.get("file"));
     })
     /*
             .then(function (resp) {
@@ -260,6 +253,7 @@ $(document).ready(function () {
     $('#pedir-botao').click(function () {
         novoPedidoApolice();
     });
+    
     $('#refresh-botao').click(function () {
         listarPedidoApolices();
     });
@@ -267,17 +261,11 @@ $(document).ready(function () {
     $('#pedido-guardar-botao').click(function () {
         criarPedidoApolice();
     });
-    /*
+    
     $('#proposta-guardar-botao').click(function () {
-        var files = singleFileUploadInput.files;
-        if(files.length === 0) {
-        singleFileUploadError.innerHTML = "Please select a file";
-        singleFileUploadError.style.display = "block";
-    }
-    uploadSingleFile(files[0]);
-    event.preventDefault();
+        enviarPropostaApolice();
     });
-    */
+    
 
     $('#pedido-apolices-table').delegate('tr td:first-child', 'click', function () {
         var numero_pedido = $(this).text();
