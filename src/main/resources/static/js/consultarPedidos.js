@@ -84,47 +84,6 @@ function listarPedidoApolices() {
          });
 }
 
-function enviarPropostaApolice() {
-    let url = '/api/propostaapolices/';
-    let method = 'post';
-    let propostaData = {
-        descricao: $("#detalhes").val(),
-        numero_pedido: $("#numero_pedido").val()
-    }
-
-    fetch(url, {
-        method: method,
-        body: JSON.stringify(propostaData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-            .then(function (resp) {
-                if (resp.ok) {
-                    listarPedidoApolices();
-                    $("#pedido-apolice-dlg").modal('hide');
-                    return;
-                } else {
-                    return resp.json();
-                }
-            })
-            /*
-            .then(function (data) {
-                if (typeof data.error !== "undefined") {
-                    $.alert({
-                        title: 'Dados inválidos!',
-                        content: data.error.data[0].msg,
-                        icon: 'fa fa-exclamation',
-                        theme: 'bootstrap',
-                        closeIcon: true,
-                        animation: 'scale',
-                        type: 'red'
-                    });
-                }
-            })
-    */
-}
-
 function uploadSingleFile(file) {
     var formData = new FormData();
     formData.append("file", file);
@@ -133,11 +92,14 @@ function uploadSingleFile(file) {
     
     fetch(url, {
         method: method,
-        body: formData, 
+        body: formData 
     })
     .then(function(resp) {
         if(resp.ok) {
             fetch('/api/topfile/')
+            .then(function(resp) {
+                return resp.json();
+            })
             .then(function(data) {
                 var id = data.id;
                 let url = '/api/propostaapolices/';
@@ -146,7 +108,7 @@ function uploadSingleFile(file) {
                     descricao: $("#detalhes").val(),
                     numero_pedido: $("#numero_pedido").val(),
                     id_ficheiro: id
-                }
+                };
 
                 fetch(url, {
                     method: method,
@@ -162,8 +124,8 @@ function uploadSingleFile(file) {
                     } else {
                         return resp.json();
                     }
-                })
-            })
+                });
+            });
         } else {
             return resp.json();
         }
@@ -274,10 +236,10 @@ $(document).ready(function () {
         if(files.length === 0) {
         singleFileUploadError.innerHTML = "Please select a file";
         singleFileUploadError.style.display = "block";
-    }
-    */
-    uploadSingleFile(files[0]);
-    event.preventDefault();
+        }
+        */
+        uploadSingleFile(files[0]);
+        event.preventDefault();
     }); 
     
     

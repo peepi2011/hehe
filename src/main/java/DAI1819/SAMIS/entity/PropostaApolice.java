@@ -17,11 +17,16 @@ public class PropostaApolice {
         
     @Column(name = "numero_pedido", nullable = false)
     private int numero_pedido;
+    
+    @Column(name = "id_ficheiro", nullable = false)
+    private int id_ficheiro;
+    
 
-    public PropostaApolice(int numero_proposta, String descricao, int numero_pedido) {
+    public PropostaApolice(int numero_proposta, String descricao, int numero_pedido, int id_ficheiro) {
         this.numero_proposta = numero_proposta;
         this.descricao = descricao;
         this.numero_pedido = numero_pedido;
+        this.id_ficheiro = id_ficheiro;
     }
 
     public PropostaApolice() {
@@ -34,6 +39,15 @@ public class PropostaApolice {
     public void setNumero_proposta(int numero_proposta) {
         this.numero_proposta = numero_proposta;
     }
+    
+    public int getId_ficheiro() {
+        return id_ficheiro;
+    }
+
+    public void setId_ficheiro(int id_ficheiro) {
+        this.id_ficheiro = id_ficheiro;
+    }
+    
 
     public String getDescricao() {
         return descricao;
