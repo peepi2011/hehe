@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DBFileRepository extends JpaRepository<DBFile, Integer> {
     DBFile findById(String id);
-    DBFile findTopByOrderByIdAsc();
-    
+    DBFile findTopByOrderByIdDesc();
 }

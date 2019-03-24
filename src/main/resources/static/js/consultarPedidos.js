@@ -130,13 +130,44 @@ function uploadSingleFile(file) {
     formData.append("file", file);
     let url = '/uploadFile';
     let method = 'post';
+    
     fetch(url, {
         method: method,
         body: formData, 
     })
-            .then(function (resp) {
-                console.log(formData.get("file"));
-    })
+    .then(function(resp) {
+        if(resp.ok) {
+            fetch('/api/topfile/')
+            .then(function(data) {
+                var id = data.id;
+                let url = '/api/propostaapolices/';
+                let method = 'post';
+                let propostaData = {
+                    descricao: $("#detalhes").val(),
+                    numero_pedido: $("#numero_pedido").val(),
+                    id_ficheiro: id
+                }
+
+                fetch(url, {
+                    method: method,
+                    body: JSON.stringify(propostaData),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(function (resp) {
+                    if (resp.ok) {
+                        listarPedidoApolices();
+                        return;
+                    } else {
+                        return resp.json();
+                    }
+                })
+            })
+        } else {
+            return resp.json();
+        }
+    });
     /*
             .then(function (resp) {
         if (resp.ok) {
@@ -148,7 +179,7 @@ function uploadSingleFile(file) {
             singleFileUploadSuccess.style.display = "none";
             singleFileUploadError.innerHTML = (resp && resp.message) || "Some Error Occurred";                }
             }) */ 
-    }
+}
     
 function criarPedidoApolice() {
     let url = '/api/pedidoapolices/'; ///necessário retificar se caso
@@ -263,7 +294,7 @@ $(document).ready(function () {
     });
     
     $('#proposta-guardar-botao').click(function () {
-        enviarPropostaApolice();
+        $("#pedido-apolice-dlg").modal('hide');
     });
     
 

@@ -45,6 +45,7 @@ public class FileController {
                 .toUriString();
         return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
                 file.getContentType(), file.getSize());
+        
     }
 
     @GetMapping("/api/files")
@@ -54,8 +55,9 @@ public class FileController {
     
     @GetMapping("/api/topfile")
     public DBFile getTopFiles() {
-        return dbFileRepository.findTopByOrderByIdAsc();
+        return dbFileRepository.findTopByOrderByIdDesc();
     }
+    
     @GetMapping("/api/files/{id}")
     public ResponseEntity<DBFile> getFileById(@PathVariable(value = "id") String fileId) {
         DBFile dbfile = em.find(DBFile.class, fileId);
