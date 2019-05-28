@@ -1,4 +1,4 @@
-package DAI1819.OBD.controller;
+package DAI1819.OBD.Controller;
 
 import DAI1819.OBD.entity.Obd;
 import java.util.List;
