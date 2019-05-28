@@ -1,4 +1,4 @@
-package DAI1819.OBD.Start;
+package DAI1819.OBD;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
