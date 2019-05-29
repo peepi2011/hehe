@@ -15,14 +15,14 @@ import java.util.Objects;
 public class ObdId implements Serializable {
     
     private String dataobd;
-    private String time;
+    private String hora;
 
     public ObdId() {
     }
 
-    public ObdId(String dataobd, String time) {
+    public ObdId(String dataobd, String hora) {
         this.dataobd = dataobd;
-        this.time = time;
+        this.hora = hora;
     }
 
     public String getDataobd() {
@@ -33,19 +33,19 @@ public class ObdId implements Serializable {
         this.dataobd = dataobd;
     }
 
-    public String getTime() {
-        return time;
+    public String getHora() {
+        return hora;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 37 * hash + Objects.hashCode(this.dataobd);
-        hash = 37 * hash + Objects.hashCode(this.time);
+        hash = 37 * hash + Objects.hashCode(this.hora);
         return hash;
     }
 
@@ -64,7 +64,7 @@ public class ObdId implements Serializable {
         if (!Objects.equals(this.dataobd, other.dataobd)) {
             return false;
         }
-        if (!Objects.equals(this.time, other.time)) {
+        if (!Objects.equals(this.hora, other.hora)) {
             return false;
         }
         return true;

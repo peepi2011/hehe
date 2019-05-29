@@ -6,8 +6,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "Obd")
-@Component("Obd")
+@Table(name = "obd")
+@Component("obd")
 @IdClass(ObdId.class)
     public class Obd implements Serializable {
         private static final long serialVersionUID = 1L;
@@ -16,10 +16,10 @@ import org.springframework.stereotype.Component;
         private String dataobd ;
     
         @Id
-        private String time;
+        private String hora;
     
-        @Column(name = "id_obd")
-        private String id_obd;
+        @Column(name = "idobd")
+        private String idobd;
         @NotNull
         
         @Column(name = "totalkm")
@@ -37,10 +37,10 @@ import org.springframework.stereotype.Component;
     public Obd() {
     }
 
-    public Obd(String dataobd, String time, String id_obd, int totalkm, int rotacoes, int tempoviagem, int velocidade) {
+    public Obd(String dataobd, String time, String idobd, int totalkm, int rotacoes, int tempoviagem, int velocidade) {
         this.dataobd = dataobd;
-        this.time = time;
-        this.id_obd = id_obd;
+        this.hora = time;
+        this.idobd = idobd;
         this.totalkm = totalkm;
         this.rotacoes = rotacoes;
         this.tempoviagem = tempoviagem;
@@ -55,20 +55,20 @@ import org.springframework.stereotype.Component;
         this.dataobd = dataobd;
     }
 
-    public String getTime() {
-        return time;
+    public String getHora() {
+        return hora;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
-    public String getId_obd() {
-        return id_obd;
+    public String getIdobd() {
+        return idobd;
     }
 
-    public void setId_obd(String id_obd) {
-        this.id_obd = id_obd;
+    public void setIdobd(String idobd) {
+        this.idobd = idobd;
     }
 
     public int getTotalkm() {
