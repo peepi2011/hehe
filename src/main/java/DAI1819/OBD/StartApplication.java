@@ -1,7 +1,9 @@
 package DAI1819.OBD;
 
+import DAI1819.OBD.Controller.ObdAverageController;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,8 +14,13 @@ public class StartApplication {
     
         static List<Integer> list = new ArrayList<Integer>();
         
+        @Autowired
+        static ObdAverageController obdAverageController;
+        
 
 	public static void main(String[] args) {
+            
+            
 		SpringApplication.run(StartApplication.class, args);
                 list.add(10);
                 list.add(21);
@@ -23,9 +30,14 @@ public class StartApplication {
                 list.add(28);
                 list.add(10);
 
-                Aceleracao aceleracao = new Aceleracao();
+                CalculoPerfilRisco aceleracao = new CalculoPerfilRisco();
                 aceleracao.calcularAceleracaoTravagem(list);
-
+                
+                obdAverageController.calcular();
+                
+                
+                
+         
 	}
 
 }

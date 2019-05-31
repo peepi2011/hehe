@@ -1,5 +1,6 @@
 package DAI1819.OBD.Controller;
 
+import DAI1819.OBD.CalculoPerfilRisco;
 import DAI1819.OBD.entity.ObdAverage;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,23 @@ public class ObdAverageController {
 
     @Autowired
     ObdAverageRepository obdAverageRepository;
+    
+    @Autowired
+    ObdController obdcontroller;
 
     //Get the data of all users from databse and send them to the client
     @GetMapping("/api/obdaverage")
     public List<ObdAverage> readAll() {
         return obdAverageRepository.findAll();
     }
+   
+    
+    @GetMapping("/api/calculo")
+    public void calcular() {
+        CalculoPerfilRisco calculo = new CalculoPerfilRisco();
+        calculo.calcularPerfilRisco(readAll(), obdcontroller.readAll());
+        
+    }
+
 
 }
