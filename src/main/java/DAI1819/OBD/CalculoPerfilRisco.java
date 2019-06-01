@@ -15,27 +15,15 @@ public class CalculoPerfilRisco {
     int numAceleracoes = 0;
     int numTravagens = 0;
 
-    private ApplicationContext context = SpringContext.getApplicationContext();
-
-
-    //Getter for the ObdController
-    private ObdController getObdController() {
-        ObdController obdController = (ObdController) context.getBean("ObdController");
-        return obdController;
-    }
-
-    //Getter for the ObdAverageController
-    private ObdAverageController getObdAverageController() {
-        ObdAverageController obdAverageController = (ObdAverageController) context.getBean("ObdAverageController");
-        return obdAverageController;
-    }
+    private GetControllers getControllers = new GetControllers();
 
 
     public void calcularPerfilRisco(){
-        List<String> listaOBDs = getObdAverageController().readAllOBDs();
+        List<String> listaOBDs = getControllers.getObdAverageController().readAllOBDs();
         List<String> lista = new ArrayList<>();
         HashMap<String,Double> resultadoPerfilRisco = new HashMap<>();
         System.out.println(listaOBDs);
+
     }
 
     public void calcularAceleracaoTravagem(List<Integer> velocidades) {
