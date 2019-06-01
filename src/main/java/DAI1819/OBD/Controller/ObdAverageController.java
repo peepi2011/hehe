@@ -29,13 +29,10 @@ public class ObdAverageController {
     public List<ObdAverage> readAll() {
         return obdAverageRepository.findAll();
     }
-   
-    
-    @GetMapping("/api/calculo")
-    public void calcular() {
-        CalculoPerfilRisco calculo = new CalculoPerfilRisco();
-        calculo.calcularPerfilRisco(readAll(), obdcontroller.readAll());
-        
+
+    @GetMapping("/api/idobds")
+    public List<String> readAllOBDs() {
+        return obdAverageRepository.findAllOBDS();
     }
 
 

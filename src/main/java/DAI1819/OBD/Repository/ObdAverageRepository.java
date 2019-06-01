@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component("ObdAverageRepository")
 public interface ObdAverageRepository extends JpaRepository<ObdAverage, String> {
     
-    /*@Query(value = "SELECT a FROM ObdAverage a")
-    List<ObdAverage> findAllOBDS();*/
+    @Query(value = "SELECT id_obd FROM ObdAverage a")
+    List<String> findAllOBDS();
       
 }
 
