@@ -7,12 +7,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"DAI1819.OBD.Controller", "DAI1819.OBD.entity", "DAI1819.OBD.Repository"})
+@ComponentScan(basePackages = {"DAI1819.OBD.Controller", "DAI1819.OBD.entity", "DAI1819.OBD.Repository","DAI1819.OBD"})
 @EnableScheduling
 public class StartApplication {
-        public static void main(String[] args) {
-            
-            
+        public static void main(String[] args) {                      
 		ApplicationContext appContext = SpringApplication.run(StartApplication.class, args);
 		SpringContext.context = appContext;
 	}
