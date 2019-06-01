@@ -30,13 +30,5 @@ public class ObdAverageController {
         return obdAverageRepository.findAll();
     }
    
-    
-    @GetMapping("/api/calculo")
-    public void calcular() {
-        CalculoPerfilRisco calculo = new CalculoPerfilRisco();
-        calculo.calcularPerfilRisco(readAll(), obdcontroller.readAll());
-        
-    }
-
 
 }
