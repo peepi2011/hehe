@@ -29,6 +29,9 @@ public class ObdAverageController {
     public List<ObdAverage> readAll() {
         return obdAverageRepository.findAll();
     }
+    public List<String> readAllOBDs() {
+        return obdAverageRepository.findAllOBDS();
+    }
    
 
 }
