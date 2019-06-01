@@ -1,37 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAI1819.OBD;
 
 import DAI1819.OBD.Controller.ObdAverageController;
-import DAI1819.OBD.entity.Obd;
-import DAI1819.OBD.entity.ObdAverage;
-import java.util.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import DAI1819.OBD.Controller.ObdController;
+import org.springframework.context.ApplicationContext;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class CalculoPerfilRisco {
 
     int numAceleracoes = 0;
     int numTravagens = 0;
-      
-    
-    
-    public void calcularPerfilRisco(List<ObdAverage> obdsAverages,List<Obd> obds){
-        List<ObdAverage> listaOBDSAverages = obdsAverages;
-        List<Obd> listaOBDS = obds;
-        
+
+    private ApplicationContext context = SpringContext.getApplicationContext();
+
+
+    //Getter for the ObdController
+    private ObdController getObdController() {
+        ObdController obdController = (ObdController) context.getBean("ObdController");
+        return obdController;
+    }
+
+    //Getter for the ObdAverageController
+    private ObdAverageController getObdAverageController() {
+        ObdAverageController obdAverageController = (ObdAverageController) context.getBean("ObdAverageController");
+        return obdAverageController;
+    }
+
+
+    public void calcularPerfilRisco(){
+        List<String> listaOBDs = getObdAverageController().readAllOBDs();
         List<String> lista = new ArrayList<>();
         HashMap<String,Double> resultadoPerfilRisco = new HashMap<>();
-        
-        for(ObdAverage obd : listaOBDSAverages){
-            lista.add(obd.getIdObd());
-        }      
-       
-        System.out.println(lista);
+        System.out.println(listaOBDs);
     }
 
     public int[] calcularAceleracaoTravagem(List<Integer> velocidades) {
