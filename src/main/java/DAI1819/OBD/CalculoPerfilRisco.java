@@ -7,7 +7,6 @@ import DAI1819.OBD.entity.ObdAverage;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,17 +50,21 @@ public class CalculoPerfilRisco {
             int numeroTravagensBruscas;
             double overall;
 
+            //Velocidades dos ultimos 7 dias
             List<Integer> velocidades = obdController.readVelocidadesLast7DaysByIdObd(idOBD);
 
+            //Resultado das acelerações e das travagens
             int[] resultados = calcularAceleracaoTravagem(velocidades);
 
+            //O primeiro elemento da lista de resultados é a aceleração
             numeroAceleracoesBruscas = resultados[0];
+            //O segundo elemento da lista de resultados é a travagem
             numeroTravagensBruscas = resultados[1];
 
-            System.out.println(idOBD + " " + velocidadeMedia + " " + rotacoesMedia + " " + kilometros + " " + tempoMedioViagem + " " + numeroAceleracoesBruscas + " " + numeroTravagensBruscas);
-
+            //Calcula a percentagem que irá ser enquadrada nos perfis de risco
             overall = calcularOverall(velocidadeMedia, rotacoesMedia, kilometros, tempoMedioViagem, numeroAceleracoesBruscas, numeroTravagensBruscas);
 
+            //Coloca num HashMap as variaveis calculadas
             perfilCalculado.put("id_obd", idOBD);
             perfilCalculado.put("velocidade_media", String.valueOf(velocidadeMedia));
             perfilCalculado.put("rotacao_media", String.valueOf(rotacoesMedia));
@@ -71,6 +74,8 @@ public class CalculoPerfilRisco {
             perfilCalculado.put("travagens_bruscas", String.valueOf(numeroTravagensBruscas));
             perfilCalculado.put("overall", String.valueOf(overall));
 
+
+            //Submete o perfil de risco calculado no servidor
             submeterPerfilRisco(perfilCalculado);
 
         }
@@ -95,16 +100,13 @@ public class CalculoPerfilRisco {
                 results[1] = numAceleracoes;
             }
             velocidades.remove(0);
-            /*if (velocidades.size() >= 2) {
-                calcularAceleracaoTravagem(velocidades);
-            }*/
-
         }
         return results;
     }
 
+    //Calculo da percentagem overall do perfil de risco
     private double calcularOverall(double velocidadeMedia, double rotacoesMedia, double kilometros, double tempoMedioViagem, int numeroAceleracoesBruscas, int numeroTravagensBruscas) {
-        System.out.println();
+        //Valores do perfilOtimo vindos da main app
         double velocidadeOtima = Double.parseDouble(perfilRiscoOtimo.get("velocidade"));
         double rotacaoOtima = Double.parseDouble(perfilRiscoOtimo.get("rotacao"));
         double aceleracoesBruscasOtima = Double.parseDouble(perfilRiscoOtimo.get("aceleracao"));
@@ -112,6 +114,7 @@ public class CalculoPerfilRisco {
         double distanciaPercorridaOtima = Double.parseDouble(perfilRiscoOtimo.get("distancia"));
         double horasConducaoOtima = Double.parseDouble(perfilRiscoOtimo.get("horas"));
 
+        //Percentagem que cada campo penaliza
         double penalizacaoVelocidade = 0.25;
         double penalizacaoRotacao = 0.15;
         double penalizacaoAceleracoesBruscas = 0.15;
@@ -119,6 +122,7 @@ public class CalculoPerfilRisco {
         double penalizacaoDistanciaPercorrida = 0.15;
         double penalizacaoHorasConducao = 0.15;
 
+        //Sumatorio das percentagens que irá retornar um valor de 0 a 1 (percentagem)
         double overall = (velocidadeMedia / velocidadeOtima) * penalizacaoVelocidade;
         overall += (rotacoesMedia / rotacaoOtima) * penalizacaoRotacao;
         overall += (kilometros / distanciaPercorridaOtima) * penalizacaoDistanciaPercorrida;
@@ -130,12 +134,14 @@ public class CalculoPerfilRisco {
 
     }
 
-    //Retorna o valor otimo de cada avriavel do perfil de risco
+    //Retorna o valor otimo de cada variavel do perfil de risco
     public static Map<String, String> getPerfilBase() {
+        //Inicializar instancia para fazer o pedido HTTP e instancias para a resposta obtida e transforma la em um JSON
         Map<String, String> response = new HashMap<>();
         HttpRequest httpRequest = new HttpRequest();
         Gson gsonObject = new Gson();
 
+        //Tentar obter o perfil base usando o pedido http, que vem em json e transformar em um Map<String, String>
         try {
             response = gsonObject.fromJson(httpRequest.getPerfilBase(), new TypeToken<HashMap<String, Object>>() {
             }.getType());
@@ -148,11 +154,10 @@ public class CalculoPerfilRisco {
 
     //Submete o perfil de risco calculado
     public void submeterPerfilRisco(Map<String, String> perfilRiscoCalculado) {
+        //Inicializar instancia para fazer o pedido HTTP e instancias para a resposta obtida e transforma la em um JSON
         HttpRequest httpRequest = new HttpRequest();
         Gson gsonObject = new Gson();
         String mensagem = gsonObject.toJson(perfilRiscoCalculado);
-        
-        System.out.println(mensagem);
 
         try {
             httpRequest.submeterPerfilRisco(mensagem);

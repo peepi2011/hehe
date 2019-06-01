@@ -11,7 +11,6 @@ public class HttpRequest {
 
     public String getPerfilBase() throws IOException {
         String resposta = null;
-
         URL urlForGetRequest = new URL("http://localhost/api/perfil_base");
         String readLine = null;
         HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
@@ -41,8 +40,6 @@ public class HttpRequest {
         os.flush();
         os.close();
         int responseCode = postConnection.getResponseCode();
-        System.out.println("POST Response Code :  " + responseCode);
-        System.out.println("POST Response Message : " + postConnection.getResponseMessage());
         if (responseCode == HttpURLConnection.HTTP_OK) { //success
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     postConnection.getInputStream()));
@@ -53,9 +50,6 @@ public class HttpRequest {
             }
             in.close();
             // print result
-            System.out.println(response.toString());
-        } else {
-            System.out.println("POST NOT WORKED");
         }
     }
 }

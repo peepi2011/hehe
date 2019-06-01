@@ -13,31 +13,14 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"DAI1819.OBD.Controller", "DAI1819.OBD.entity", "DAI1819.OBD.Repository"})
 
 public class StartApplication {
-
-        static List<Integer> list = new ArrayList<Integer>();
-        
-        @Autowired
-        static ObdAverageController obdAverageController;
-        
-
         public static void main(String[] args) {
             
             
 		ApplicationContext appContext = SpringApplication.run(StartApplication.class, args);
-		SpringContext.context = appContext;            
-                
+		SpringContext.context = appContext;
 
-		list.add(10);
-		list.add(21);
-		list.add(10);
-		list.add(12);
-		list.add(18);
-		list.add(28);
-		list.add(10);
-
-		CalculoPerfilRisco aceleracao = new CalculoPerfilRisco();
-		aceleracao.calcularAceleracaoTravagem(list);
-		aceleracao.calcularPerfisRisco();
+		CalculoPerfilRisco calculoPerfilRisco = new CalculoPerfilRisco();
+		calculoPerfilRisco.calcularPerfisRisco();
 	}
 
 }
