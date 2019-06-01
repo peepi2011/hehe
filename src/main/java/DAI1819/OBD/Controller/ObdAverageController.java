@@ -24,14 +24,24 @@ public class ObdAverageController {
     @Autowired
     ObdController obdcontroller;
 
-    //Get the data of all users from databse and send them to the client
+    //Lista de todos dos obds da base de dados
     @GetMapping("/api/obdaverage")
     public List<ObdAverage> readAll() {
         return obdAverageRepository.findAll();
     }
+    
+    
+    //Lista de todos os ids dos obds da base de dados
     public List<String> readAllOBDs() {
         return obdAverageRepository.findAllOBDS();
     }
+    
+    
+    //Lista de todos os ids dos obds da base de dados
+    public ObdAverage readByIdOBD(String idOBD) {
+        return obdAverageRepository.findByIdObd(idOBD);
+    }
+
    
 
 }

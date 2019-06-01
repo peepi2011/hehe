@@ -14,6 +14,11 @@ public interface ObdAverageRepository extends JpaRepository<ObdAverage, String> 
     
     @Query(value = "SELECT id_obd FROM ObdAverage a")
     List<String> findAllOBDS();
+    
+    
+    //Retorna o objeto obd
+    @Query(value = "SELECT a FROM ObdAverage a WHERE id_obd=?1")
+    ObdAverage findByIdObd(String idObd);
       
 }
 

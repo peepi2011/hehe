@@ -14,12 +14,10 @@ import org.springframework.stereotype.Component;
         private static final long serialVersionUID = 1L;
         
         @Id
-        @Column(name = "id_obd")
         private String id_obd;
-        @NotNull
         
         @Column(name = "tempo")
-        private String tempo;
+        private double tempo;
         
         @Column(name = "velocidade")
         private int velocidade;
@@ -34,7 +32,7 @@ import org.springframework.stereotype.Component;
         public ObdAverage() {
         }
         
-        public ObdAverage(String idObd, int velocidade, int rotacoes, int km, String tempo) {
+        public ObdAverage(String idObd, int velocidade, int rotacoes, int km, double tempo) {
             this.id_obd = idObd;
             this.velocidade = velocidade;
             this.rotacoes = rotacoes;
@@ -74,11 +72,11 @@ import org.springframework.stereotype.Component;
             this.km = km;
         }
 
-        public String getTempo() {
+        public double getTempo() {
             return tempo;
         }
 
-        public void setTempo(String tempo) {
+        public void setTempo(double tempo) {
             this.tempo = tempo;
         }
     }

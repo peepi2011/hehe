@@ -25,5 +25,9 @@ public class ObdController {
     public List<Obd> readAll() {
         return obdRepository.findAll();
     }
+    
+    public List<Integer> readVelocidadesLast7DaysByIdObd(String idObd) {
+        return obdRepository.findVelocidadeLast7DaysByidobd(idObd);
+    }
 
 }

@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.core.io.ClassPathResource;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"DAI1819.OBD.Controller", "DAI1819.OBD.entity", "DAI1819.OBD.Repository"})
+
 public class StartApplication {
 
         static List<Integer> list = new ArrayList<Integer>();
@@ -25,7 +24,8 @@ public class StartApplication {
             
             
 		ApplicationContext appContext = SpringApplication.run(StartApplication.class, args);
-		SpringContext.context = appContext;
+		SpringContext.context = appContext;            
+                
 
 		list.add(10);
 		list.add(21);
@@ -39,7 +39,7 @@ public class StartApplication {
 		aceleracao.calcularAceleracaoTravagem(list);
 
 		System.out.println();
-		aceleracao.calcularPerfilRisco();
+		aceleracao.calcularPerfisRisco();
 	}
 
 }

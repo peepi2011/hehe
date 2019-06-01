@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 @Component("ObdRepository")
 public interface ObdRepository extends JpaRepository<Obd, String> {
     
+    //Lista de velocidades de um obd
+    @Query(value ="SELECT velocidade FROM daiObd.obd where idobd =?1 AND (`daiObd`.`obd`.`dataobd` >= (CAST(NOW() AS DATE) - INTERVAL 7 DAY)) order by dataobd",nativeQuery = true)
+    List<Integer> findVelocidadeLast7DaysByidobd(String idObd);
+    
     
    
       
