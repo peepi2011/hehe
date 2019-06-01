@@ -32,14 +32,11 @@ public class StartApplication {
                 
                 lista.add(70.0);
                 lista.add(2001.0);
-                lista.add(7.0);
                 lista.add(150.0);
-                lista.add(5.0);
                 lista.add(4.0);
 
                 CalculoPerfilRisco aceleracao = new CalculoPerfilRisco();
-                aceleracao.calcularAceleracaoTravagem(list);
-                aceleracao.calcularestatico(lista);
+                aceleracao.calcularestatico(lista, aceleracao.calcularAceleracaoTravagem(list) );
                 obdAverageController.calcular();
 
 	}

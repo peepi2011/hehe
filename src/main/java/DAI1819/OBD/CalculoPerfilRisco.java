@@ -34,13 +34,12 @@ public class CalculoPerfilRisco {
         System.out.println(lista);
     }
 
-    public void calcularAceleracaoTravagem(List<Integer> velocidades) {
+    public int[] calcularAceleracaoTravagem(List<Integer> velocidades) {
         //velocidades vem de uma query que está order by data
         double valor1 = velocidades.get(0);
         double valor2 = velocidades.get(1);
         //positivo se for uma travagem; negativo se for aceleração
         double percentagem = ((valor1 - valor2) / valor1);
-        System.out.println(percentagem);
         if (percentagem > 0.5) {
             numTravagens++;
         }
@@ -53,11 +52,11 @@ public class CalculoPerfilRisco {
         }
 
         int[] results = {numAceleracoes, numTravagens};
-        System.out.println(Arrays.toString(results));
+        return results;
         
     }
     
-    public void calcularestatico(List<Double> parametros) {
+    public void calcularestatico(List<Double> parametros, int[] results) {
         
         double v_cm = 50;
         double r_cm = 2000;
@@ -75,11 +74,13 @@ public class CalculoPerfilRisco {
         
         double v = parametros.get(0);
         double r = parametros.get(1);
-        double a = parametros.get(2);
-        double d = parametros.get(3);
-        double t = parametros.get(4);
-        double h = parametros.get(5);
+        double a = results[0];
+        double d = parametros.get(2);
+        double t = results[1];
+        double h = parametros.get(3);
         double pr; 
+        
+        System.out.println(a + " - " + t);
         
         pr = p_v - ((v/v_cm) - 1) * penalizacao;
         pr += p_r - ((r/r_cm) - 1) * penalizacao;
