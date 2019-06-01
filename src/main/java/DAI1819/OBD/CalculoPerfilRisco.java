@@ -56,4 +56,38 @@ public class CalculoPerfilRisco {
         System.out.println(Arrays.toString(results));
         
     }
+    
+    public void calcularestatico(List<Double> parametros) {
+        
+        double v_cm = 50;
+        double r_cm = 2000;
+        double a_brusc = 5;
+        double d_perc = 100;
+        double t_brusc = 2;
+        double h_cond = 2;
+        double p_v = 0.25;
+        double p_r = 0.15;
+        double p_a = 0.15;
+        double p_d = 0.15;
+        double p_t = 0.15;
+        double p_h = 0.15;
+        double penalizacao = 0.1;
+        
+        double v = parametros.get(0);
+        double r = parametros.get(1);
+        double a = parametros.get(2);
+        double d = parametros.get(3);
+        double t = parametros.get(4);
+        double h = parametros.get(5);
+        double pr; 
+        
+        pr = p_v - ((v/v_cm) - 1) * penalizacao;
+        pr += p_r - ((r/r_cm) - 1) * penalizacao;
+        pr += p_a - ((a/a_brusc) - 1) * penalizacao;
+        pr += p_d - ((d/d_perc) - 1) * penalizacao;
+        pr += p_t - ((t/t_brusc) - 1) * penalizacao;
+        pr += p_h - ((h/h_cond) - 1) * penalizacao;
+        
+        System.out.println(pr);
+    }
 }
