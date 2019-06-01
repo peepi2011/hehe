@@ -37,8 +37,6 @@ public class StartApplication {
 
 		CalculoPerfilRisco aceleracao = new CalculoPerfilRisco();
 		aceleracao.calcularAceleracaoTravagem(list);
-
-		System.out.println();
 		aceleracao.calcularPerfisRisco();
 	}
 
