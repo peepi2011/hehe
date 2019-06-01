@@ -7,6 +7,7 @@ import DAI1819.OBD.entity.ObdAverage;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,25 +79,28 @@ public class CalculoPerfilRisco {
 
     //Calculo do numero de aceleracoes bruscas e travagens
     public int[] calcularAceleracaoTravagem(List<Integer> velocidades) {
-        //velocidades vem de uma query que está order by data
-        double valor1 = velocidades.get(0);
-        double valor2 = velocidades.get(1);
-        //positivo se for uma travagem; negativo se for aceleração
-        double percentagem = ((valor1 - valor2) / valor1);
-        if (percentagem > 0.5) {
-            numTravagens++;
-        }
-        if (percentagem < -0.25) {
-            numAceleracoes++;
-        }
-        velocidades.remove(0);
-        if (velocidades.size() >= 2) {
-            calcularAceleracaoTravagem(velocidades);
-        }
+        int[] results = new int[2];
+        for(int i = 0; velocidades.size() >= 2; i++) {
+            //velocidades vem de uma query que está order by data
+            double valor1 = velocidades.get(0);
+            double valor2 = velocidades.get(1);
+            //positivo se for uma travagem; negativo se for aceleração
+            double percentagem = ((valor1 - valor2) / valor1);
+            if (percentagem > 0.5) {
+                numTravagens++;
+                results[0] = numTravagens;
+            }
+            if (percentagem < -0.25) {
+                numAceleracoes++;
+                results[1] = numAceleracoes;
+            }
+            velocidades.remove(0);
+            /*if (velocidades.size() >= 2) {
+                calcularAceleracaoTravagem(velocidades);
+            }*/
 
-        int[] results = {numAceleracoes, numTravagens};
+        }
         return results;
-
     }
 
     private double calcularOverall(double velocidadeMedia, double rotacoesMedia, double kilometros, double tempoMedioViagem, int numeroAceleracoesBruscas, int numeroTravagensBruscas) {
