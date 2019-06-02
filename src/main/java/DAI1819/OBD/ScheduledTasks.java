@@ -9,9 +9,9 @@ public class ScheduledTasks {
     
     @Scheduled(cron = "	0 0 0 ? * SUN ")
     public void calculoPerfilRisco(){
-    System.out.println("Ola");
-    CalculoPerfilRisco calculo = new CalculoPerfilRisco();    
-    calculo.calcularPerfisRisco();   
+        System.out.println("Ola");
+        CalculoPerfilRisco calculo = new CalculoPerfilRisco();    
+        calculo.calcularPerfisRisco();   
     }
     
 }

@@ -11,7 +11,7 @@ public class HttpRequest {
 
     public String getPerfilBase() throws IOException {
         String resposta = null;
-        URL urlForGetRequest = new URL("http://localhost/api/perfil_base");
+        URL urlForGetRequest = new URL("http://veebix.com/api/perfil_base");
         String readLine = null;
         HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
         conection.setRequestMethod("GET");
@@ -30,7 +30,7 @@ public class HttpRequest {
     }
 
     public void submeterPerfilRisco(String params) throws IOException {
-        URL obj = new URL("http://localhost/api/perfis_risco/associar_perfil_risco");
+        URL obj = new URL("http://veebix.com/api/perfis_risco/associar_perfil_risco");
         HttpURLConnection postConnection = (HttpURLConnection) obj.openConnection();
         postConnection.setRequestMethod("POST");
         postConnection.setRequestProperty("Content-Type", "application/json");
