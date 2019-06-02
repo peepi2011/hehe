@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduledTasks {
     
-    @Scheduled(cron = "	59 23 * * Sun ")
+    @Scheduled(cron = "	0 59 23 ? * MON ")
     public void calculoPerfilRisco(){
         System.out.println("Ola");
         CalculoPerfilRisco calculo = new CalculoPerfilRisco();    
