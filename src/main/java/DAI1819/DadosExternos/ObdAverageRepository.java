@@ -1,6 +1,6 @@
-package DAI1819.OBD.Repository;
+package DAI1819.DadosExternos;
 
-import DAI1819.OBD.entity.ObdAverage;
+import DAI1819.DadosExternos.ObdAverage;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

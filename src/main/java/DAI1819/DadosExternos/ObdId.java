@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAI1819.OBD.entity;
+package DAI1819.DadosExternos;
 
 import java.io.Serializable;
 import java.util.Objects;

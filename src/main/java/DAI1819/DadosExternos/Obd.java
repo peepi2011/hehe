@@ -1,4 +1,4 @@
-package DAI1819.OBD.entity;
+package DAI1819.DadosExternos;
 
 import java.io.Serializable;
 import javax.persistence.*;

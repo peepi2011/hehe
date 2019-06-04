@@ -1,9 +1,5 @@
-package DAI1819.OBD;
+package DAI1819.DadosExternos;
 
-import DAI1819.OBD.Controller.ObdAverageController;
-import DAI1819.OBD.Controller.ObdController;
-import DAI1819.OBD.HttpRequest.HttpRequest;
-import DAI1819.OBD.entity.ObdAverage;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;

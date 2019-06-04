@@ -1,6 +1,6 @@
-package DAI1819.OBD.Repository;
+package DAI1819.DadosExternos;
 
-import DAI1819.OBD.entity.Obd;
+import DAI1819.DadosExternos.Obd;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

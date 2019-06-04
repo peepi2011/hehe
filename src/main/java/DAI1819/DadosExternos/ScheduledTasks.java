@@ -1,4 +1,4 @@
-package DAI1819.OBD;
+package DAI1819.DadosExternos;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

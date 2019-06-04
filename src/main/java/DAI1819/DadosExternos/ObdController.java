@@ -1,13 +1,11 @@
-package DAI1819.OBD.Controller;
+package DAI1819.DadosExternos;
 
-import DAI1819.OBD.entity.Obd;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Component;
-import DAI1819.OBD.Repository.ObdRepository;
 
 
 @RestController

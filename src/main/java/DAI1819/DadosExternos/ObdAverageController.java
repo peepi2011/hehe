@@ -1,14 +1,12 @@
-package DAI1819.OBD.Controller;
+package DAI1819.DadosExternos;
 
-import DAI1819.OBD.CalculoPerfilRisco;
-import DAI1819.OBD.entity.ObdAverage;
+import DAI1819.DadosExternos.CalculoPerfilRisco;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import org.springframework.stereotype.Component;
-import DAI1819.OBD.Repository.ObdAverageRepository;
 
 
 @RestController

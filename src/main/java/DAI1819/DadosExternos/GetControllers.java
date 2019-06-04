@@ -1,7 +1,5 @@
-package DAI1819.OBD;
+package DAI1819.DadosExternos;
 
-import DAI1819.OBD.Controller.ObdAverageController;
-import DAI1819.OBD.Controller.ObdController;
 import org.springframework.context.ApplicationContext;
 
 public class GetControllers {

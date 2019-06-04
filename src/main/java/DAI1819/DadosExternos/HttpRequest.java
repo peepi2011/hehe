@@ -1,4 +1,4 @@
-package DAI1819.OBD.HttpRequest;
+package DAI1819.DadosExternos;
 
 import java.io.BufferedReader;
 import java.io.IOException;
