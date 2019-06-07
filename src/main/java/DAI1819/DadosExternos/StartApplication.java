@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"DAI1819.OBD.Controller", "DAI1819.OBD.entity", "DAI1819.OBD.Repository","DAI1819.OBD"})
+@ComponentScan(basePackages = {"DAI1819.DadosExternos"})
 @EnableScheduling
 public class StartApplication {
         public static void main(String[] args) {                      
