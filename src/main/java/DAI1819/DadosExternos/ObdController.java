@@ -1,17 +1,10 @@
 package DAI1819.DadosExternos;
 
 import com.google.gson.Gson;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,12 +40,12 @@ public class ObdController {
         Gson gsonObject = new Gson();
         ArrayList<String> response = null;
         response = gsonObject.fromJson(data, ArrayList.class);
-        System.out.println(idOBD);
 
         for (Object jsonData : response) {
             Obd obd = new Obd();
             Map<String, String> obdRowData = new HashMap<>();
             String[] jsonDataItems = jsonData.toString().replace("{", "").replace("}", "").split(",");
+            
             for (String str : jsonDataItems) {
                 String[] finalStr = str.split("=");
                 obdRowData.put(finalStr[0], finalStr[1]);
@@ -64,7 +57,6 @@ public class ObdController {
             String month = null;
             //Split date and Time
             String[] dateItems = splitDateAndTime[0].split("-");
-            System.out.println(dateItems[1]);
             switch (dateItems[1]) {
                 case "january":
                 case "jan":
@@ -136,8 +128,6 @@ public class ObdController {
 
             String formatDate = dateItems[2] + "-" + month + "-" + dateItems[0];
 
-            System.out.println(formatDate);
-
             //Create OBD ROW
             obd.setIdobd(idOBD);
             obd.setDataobd(formatDate);
@@ -147,7 +137,7 @@ public class ObdController {
             obd.setTempoviagem(Double.valueOf(obdRowData.get(" Trip time(whilst moving)(s)")).intValue());
             obd.setVelocidade(Integer.valueOf(obdRowData.get(" Speed (OBD)(km/h)")));
             
-            //obdRepository.save(obd);           
+            obdRepository.save(obd);           
         }
         return new ResponseEntity<>("Sucesso!", HttpStatus.OK);
     }
